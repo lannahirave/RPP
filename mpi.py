@@ -20,17 +20,17 @@ def main():
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
-    matrix = read_matrix_from_file("matrix.txt")
-
-    n = len(matrix)
+    
     if rank == 0:
-
+        matrix = read_matrix_from_file("matrix.txt")
+        n = len(matrix)
         matrix1 = np.matrix(matrix)
         matrix2 = np.matrix(matrix)
 
         start_time = time.time()
 
         # розкидуєм по процесах
+        comm.bcast(n, root=0)
         local_matrix1 = np.empty((n // size, n), dtype=int)
         comm.Scatter(matrix1, local_matrix1, root=0)
 
@@ -50,6 +50,8 @@ def main():
             save_matrix_to_file(global_result, "mpi_matrix.txt")
 
     else:
+        n = comm.bcast(None, root=0)
+
         local_matrix1 = np.empty((n // size, n), dtype=int)
 
         comm.Scatter(None, local_matrix1, root=0)
