@@ -1,0 +1,9 @@
+/.vscode/settings.json
+/default_matrix.txt
+/ix_openmp.txt
+/matrices_openmp
+/matrix.txt
+/matrix_openmp.txt
+/mpi_matrix.txt
+./idea/**/*
+./.idea/**/*
