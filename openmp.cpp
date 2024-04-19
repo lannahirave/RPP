@@ -10,7 +10,7 @@ vector<vector<int>> multiplyMatrices(const vector<vector<int>> &matrix1, const v
 {
     int N = matrix1.size();
     vector<vector<int>> result(N, vector<int>(N, 0));
-#pragma omp parallel for collapse(2)
+#pragma omp parallel for collapse(3)
     for (int i = 0; i < N; ++i)
     {
         for (int j = 0; j < N; ++j)

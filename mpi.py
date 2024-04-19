@@ -40,8 +40,8 @@ def main():
 
 
         global_result = None
-        if rank == 0:
-            global_result = np.empty((n, n), dtype=int)
+        
+        global_result = np.empty((n, n), dtype=int)
         comm.Gather(local_result, global_result, root=0)
 
         end_time = time.time()
@@ -59,7 +59,6 @@ def main():
         matrix2 = comm.bcast(None, root=0)
 
         local_result = multiply_matrices(local_matrix1, matrix2)
-
         comm.Gather(local_result, None, root=0)
 
 
