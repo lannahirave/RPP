@@ -1,0 +1,1 @@
+g++ openmp.cpp -o matrices_openmp -fopenmp
